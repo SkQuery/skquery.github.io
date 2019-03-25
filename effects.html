@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>SkQuery documentation</title>
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">	
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<!-- FontAwesome JS -->
+	<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+	<!-- Global CSS -->
+	<link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+	<!-- Plugins CSS -->	
+	<link rel="stylesheet" href="assets/plugins/prism/prism.css">
+	<link rel="stylesheet" href="assets/plugins/elegant_font/css/style.css">  
+	  
+	<!-- Theme CSS -->
+	<link id="theme-style" rel="stylesheet" href="assets/css/styles.css">
+	
+</head> 
+
+<body id="top" class="body-blue">
+	<div class="page-wrapper">
+		<!-- ******Header****** -->
+		<header id="header" class="header">
+			<div class="container">
+				<div class="branding">
+					<h1 class="logo">
+						<a href="index.html">
+							<span aria-hidden="true" class="icon icon_documents_alt"></span>
+							<span class="text-highlight">SkQuery</span><span class="text-bold"> Docs</span>
+						</a>
+					</h1>
+				</div>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item active">Effects</li>
+				</ol>
+			</div>
+		</header>
+		
+		<div class="doc-wrapper">
+			<div class="container">
+				<div id="doc-header" class="doc-header text-center">
+					<h1 class="doc-title"><i class="icon icon_search-2"></i>Effects</h1>
+					<div class="meta"><i class="icon_pushpin_alt"></i> SkQuery Version: 3.6.3</div>
+					<div class="meta"><i class="far fa-clock"></i> Last updated: March 25th, 2019</div>
+				</div>
+				<div class="doc-body row">
+					<div class="doc-content col-md-9 col-12 order-1">
+						<div class="content-inner">
+<section id="EffClearRecipes" class="doc-section">
+	<h2 class="section-title">Clear Server Recipes</h2>
+	<div class="section-block">
+		<p>Clears all recipes registered in the server. Use <a href="#EffClearItemRecipe">this effect</a> to clear individual recipes.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">wipe server crafting recipes<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on script load:
+	wipe server crafting recipes
+</code></pre>
+	</div>
+</section>
+<section id="EffDeserializeInventory" class="doc-section">
+	<h2 class="section-title">Restore Inventory</h2>
+	<div class="section-block">
+		<p>Restores a player's inventory to a backup. This effect is deprecated and you should use <a href="#ExprInventorySerials">Inventory Serials</a> instead.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">restore %inventories% (to|from) %string%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffMIDIStop" class="doc-section">
+	<h2 class="section-title">Stop MIDI</h2>
+	<div class="section-block">
+		<p>Stops a midi file that is playing.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">stop midi [id] %string%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on join:
+	play midi "login" to player
+	wait 5 seconds
+	stop midi "login"
+</code></pre>
+	</div>
+</section>
+<section id="EffPathfind" class="doc-section">
+	<h2 class="section-title">Pathfind</h2>
+	<div class="section-block">
+		<p>Invoke the entity pathfinder. Allows entities to pathfind to a location unless they are distracted. Not all entities have pathfinders.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">make %livingentities% pathfind to %location% (with|at) speed %number%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on click on cow:
+	while clicked entity exists:
+		make clicked entity pathfind to player with speed
+		wait 1 tick
+</code></pre>
+	</div>
+</section>
+<section id="EffOptionSQLUsername" class="doc-section">
+	<h2 class="section-title">SQL Username Option</h2>
+	<div class="section-block">
+		<p>Sets the script-wide database connection username. Required for an SQL connection.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">$ db username <.+><br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">script options:
+	$ init com.mysql.jdbc.Driver
+	$ db url jdbc:mysql://localhost:3306/skript
+	$ db username admin
+	$ db password heil_putin
+</code></pre>
+	</div>
+</section>
+<section id="EffClearItemRecipes" class="doc-section">
+	<h2 class="section-title">Clear Single Recipes</h2>
+	<div class="section-block">
+		<p>Clears all recipes for a single item.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">wipe crafting recipes for %itemtypes%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on script load:
+	wipe crafting recipes for stick and iron pickaxe
+</code></pre>
+	</div>
+</section>
+<section id="EffOptionSQLPool" class="doc-section">
+	<h2 class="section-title">EffOptionSQLPool</h2>
+	<div class="section-block">
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">$ pool <.+><br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffShootItemProjectile" class="doc-section">
+	<h2 class="section-title">EffShootItemProjectile</h2>
+	<div class="section-block">
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">make %livingentity% shoot [an] item projectile [of] %itemtype% [at speed %number%]<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffShowCredits" class="doc-section">
+	<h2 class="section-title">EffShowCredits</h2>
+	<div class="section-block">
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">display credits to %player%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffMakeSay" class="doc-section">
+	<h2 class="section-title">Make Say</h2>
+	<div class="section-block">
+		<p>Force players to say text in chat. If you add a leading slash in the text, it will execute a command.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">(make|force) %players% [to] say %strings%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on chat:
+	cancel event
+	make a random player out of all players say message
+</code></pre>
+	</div>
+</section>
+<section id="EffOptionSQLURL" class="doc-section">
+	<h2 class="section-title">SQL URL Option</h2>
+	<div class="section-block">
+		<p>Sets the script-wide database connection url. Required for an SQL connection.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">$ db url <.+><br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">script options:
+	$ init com.mysql.jdbc.Driver
+	$ db url jdbc:mysql://localhost:3306/skript
+	$ db username admin
+	$ db password heil_putin
+</code></pre>
+	</div>
+</section>
+<section id="EffBlockFall" class="doc-section">
+	<h2 class="section-title">Spawn Falling Block</h2>
+	<div class="section-block">
+		<p>Summons falling blocks with modifiable properties.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">spawn falling block of %itemtype% at %locations%<br/><br/>spawn damaging falling block of %itemtype% at %locations%<br/><br/>spawn undroppable falling block of %itemtype% at %locations%<br/><br/>spawn damaging undroppable falling block of %itemtype% at %locations%<br/><br/>spawn undroppable damaging falling block of %itemtype% at %locations%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on place of dirt:
+	cancel event
+	spawn falling block of dirt at block
+</code></pre>
+	</div>
+</section>
+<section id="EffNewRecipe" class="doc-section">
+	<h2 class="section-title">Register Recipe</h2>
+	<div class="section-block">
+		<p>Register a crafting recipe. Use air as an itemtype to indicate the slot is not used. All 9 itemtypes must be present.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">register new shaped recipe for %itemtype% using %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%<br/><br/>register new shapeless recipe for %itemtype% using %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%, %itemtype%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffLeash" class="doc-section">
+	<h2 class="section-title">Leash Entities</h2>
+	<div class="section-block">
+		<p>Cause multiple entities to leash other entities.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">make %entities% (leash|lead) %livingentities%<br/><br/>(leash|lead) %livingentities% to %entities%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on click:
+	make player leash clicked entity
+</code></pre>
+	</div>
+</section>
+<section id="EffOptionThread" class="doc-section">
+	<h2 class="section-title">Safely Execute Thread</h2>
+	<div class="section-block">
+		<p>Makes the next line of code run on a different thread. The code following it will be delayed until the thread finishes.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">$ thread<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffExecuteLambda" class="doc-section">
+	<h2 class="section-title">EffExecuteLambda</h2>
+	<div class="section-block">
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">(do|execute) [%-number% time[s]] %lambda%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffEvaluateEffect" class="doc-section">
+	<h2 class="section-title">Evaluate Input Effect</h2>
+	<div class="section-block">
+		<p>Runs the input string relative to the calling trigger which invoked it.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">evaluate %string/markup%<br/><br/>^%markup%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">command /effectcommand <text>:
+	trigger:
+		evaluate argument
+</code></pre>
+	</div>
+</section>
+<section id="EffTexture" class="doc-section">
+	<h2 class="section-title">EffTexture</h2>
+	<div class="section-block">
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">send [(resource|texture)] pack from %string% to %players%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffPop" class="doc-section">
+	<h2 class="section-title">Pop Firework</h2>
+	<div class="section-block">
+		<p>Instantly detonate a firework at a given location. Having multiple effects will cause them to stack.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">(detonate|pop) %fireworkeffects% at %locations%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on death:
+	pop ball large firework colored red at victim
+</code></pre>
+	</div>
+</section>
+<section id="EffSound" class="doc-section">
+	<h2 class="section-title">Play Raw Sound</h2>
+	<div class="section-block">
+		<p>Imitates the functionality of the /playsound command, without the ability to specify target players.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">play [raw] sound %string/sound% at %locations% with pitch %number% [and] volume %number%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on sneak toggle:
+	play raw sound "mob.bat.death" at player with pitch 1 volume 10
+</code></pre>
+	</div>
+</section>
+<section id="EffOptionSkriptPermissionsManager" class="doc-section">
+	<h2 class="section-title">skQueryPerms Option</h2>
+	<div class="section-block">
+		<p>Enables skQuery as a permissions manager. You will then be able to access expressions that represent player permissions and change them with Skript.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">$ use permissions<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">script options:
+	$ use permissions
+</code></pre>
+	</div>
+</section>
+<section id="EffSQLUpdate" class="doc-section">
+	<h2 class="section-title">EffSQLUpdate</h2>
+	<div class="section-block">
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">update %string%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffPlayerVisibility" class="doc-section">
+	<h2 class="section-title">Visibility</h2>
+	<div class="section-block">
+		<p>Show or hide players from each other</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">hide %players% (to|from) %players%<br/><br/>reveal %players% (to|from) %players%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">command /ghosts:
+	trigger:
+		hide all players from all players
+</code></pre>
+	</div>
+</section>
+<section id="EffTameTo" class="doc-section">
+	<h2 class="section-title">EffTameTo</h2>
+	<div class="section-block">
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">tame %entities% to %player%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffEscape" class="doc-section">
+	<h2 class="section-title">Escape Lines</h2>
+	<div class="section-block">
+		<p>Skip the execution of a certain number of lines.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">escape %number% [(level[s]|line[s])]<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on script load:
+	escape 1
+	stop
+	message "Stop avoided!" to console
+</code></pre>
+	</div>
+</section>
+<section id="EffOptionSQLInit" class="doc-section">
+	<h2 class="section-title">Preinit Driver Option</h2>
+	<div class="section-block">
+		<p>Allows you to initialize an SQL driver before accessing it. Not required for an SQL connection.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">$ init <.+><br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">script options:
+	$ init com.mysql.jdbc.Driver
+	$ db url jdbc:mysql://localhost:3306/skript
+	$ db username admin
+	$ db password heil_putin
+</code></pre>
+	</div>
+</section>
+<section id="EffStopServer" class="doc-section">
+	<h2 class="section-title">EffStopServer</h2>
+	<div class="section-block">
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">(stop|shutdown) server<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffSetBlock" class="doc-section">
+	<h2 class="section-title">Set Block Without Updates</h2>
+	<div class="section-block">
+		<p>Set blocks to another block without causing surrounding blocks to update.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">@noupdate::set %blocks% to %itemtype%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+<section id="EffBranch" class="doc-section">
+	<h2 class="section-title">Branch</h2>
+	<div class="section-block">
+		<p>Execute the following code X times. Useful for testing probabilities without requiring a loop and indentation.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">branch %number%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on script load:
+	branch 10
+	message "This message will pop up 10 times" to console
+</code></pre>
+	</div>
+</section>
+<section id="EffOptionSQLPassword" class="doc-section">
+	<h2 class="section-title">SQL Password Option</h2>
+	<div class="section-block">
+		<p>Sets the script-wide database connection password. Required for an SQL connection.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">$ db password <.+><br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">script options:
+	$ init com.mysql.jdbc.Driver
+	$ db url jdbc:mysql://localhost:3306/skript
+	$ db username admin
+	$ db password heil_putin
+</code></pre>
+	</div>
+</section>
+<section id="EffHoming" class="doc-section">
+	<h2 class="section-title">Entity Homing</h2>
+	<div class="section-block">
+		<p>Cause an entity to home towards a locations. Specifying 'normally' reduces bugs caused by varying distances, but makes it less accurate.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">make %entity% home towards %location%<br/><br/>make %entities% home towards %location% normally<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">make targeted entity home towards player normally
+</code></pre>
+	</div>
+</section>
+<section id="EffMakeDamage" class="doc-section">
+	<h2 class="section-title">Make Damage</h2>
+	<div class="section-block">
+		<p>Cause entities to damage each other. If you cause hostile mobs to attack or be attacked, they will become aggroed on the last entity that they hit or got hit by.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">(make|force) %livingentities% [to] damage %livingentities% by %number%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">command /massacre:
+	trigger:
+		make all pigs damage all cows by 1
+</code></pre>
+	</div>
+</section>
+<section id="EffMIDI" class="doc-section">
+	<h2 class="section-title">Play MIDI</h2>
+	<div class="section-block">
+		<p>Plays a file with the extention .mid to a player.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">play midi [from] %string% (for|to) %players% [at [tempo] %-number%] [with id %-string%]<br/><br/>play midi from (website|link) %string% (for|to) %players% [at [tempo] %-number%] [with id %-string%]<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on join:
+	play midi "login" to player
+</code></pre>
+	</div>
+</section>
+<section id="EffFormatSlot" class="doc-section">
+	<h2 class="section-title">Format Inventory Slot</h2>
+	<div class="section-block">
+		<p>Formats a slot in the player's open inventory to do certain actions. This should be done directly after showing an inventory to the player.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">format slot %number% of %players% with %itemstack% to close then run %string/lambda%<br/><br/>format slot %number% of %players% with %itemstack% to run %string/lambda%<br/><br/>format slot %number% of %players% with %itemstack% to close<br/><br/>format slot %number% of %players% with %itemstack% to (be|act) unstealable<br/><br/>unformat slot %number% of %players%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">command /construct:
+	trigger:
+		open chest with 1 rows named "&4My first test menu" to player
+		format slot 0 of player with 5 of steak named "Item 1" to close then run "say The first item was clicked! Menu Closed!"
+		format slot 2 of player with fire named "Close Menu" with lore "I will close this menu.||Nothing more, nothing less." to close
+</code></pre>
+	</div>
+</section>
+<section id="EffOptionDeveloperMode" class="doc-section">
+	<h2 class="section-title">Developer Mode Option</h2>
+	<div class="section-block">
+		<p>Enable the developer mode pragma to auto reload a script as it changes.  This must be placed under the script-local options.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">$ developer mode<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">script options:
+	$ developer mode
+</code></pre>
+	</div>
+</section>
+<section id="EffLaunchFirework" class="doc-section">
+	<h2 class="section-title">Launch Fireworks</h2>
+	<div class="section-block">
+		<p>Launch a firework with any number of firework effects at a given location and flight duration. Use <a href="../expressions/#ExprFireworkEffect">this expression</a> to create firework effects.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">(launch|deploy) %fireworkeffects% at %locations% (with duration|timed) %number%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on death:
+	launch creeper firework colored red at victim timed 1
+</code></pre>
+	</div>
+</section>
+<section id="EffClientSign" class="doc-section">
+	<h2 class="section-title">Client Sign</h2>
+	<div class="section-block">
+		<p>Cause a sign to have custom lines to certain viewers</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">make %players% see lines of %blocks% as %string%, %string%, %string%( and|,) %string%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">command /hidesign:
+	trigger:
+		make all players see lines of targeted block as "", "", "", ""
+</code></pre>
+	</div>
+</section>
+<section id="EffClientBlock" class="doc-section">
+	<h2 class="section-title">Client Block</h2>
+	<div class="section-block">
+		<p>Make a player see a block as another type of block. If the client recieves an update to the block, it will revert.</p>
+	</div>
+	<div class="syntax-effects">
+		<code class="syntax-effects-button">make %players% see %blocks% as %itemtype%<br/></code>
+		<span aria-hidden="true" class="syntax-effects-copy-button icon_documents_alt"></span>
+	</div>
+	<div id="html" class="section-block">
+		<h6>Example</h6>
+		<pre><code class="language-markup">on click:
+	make player see clicked block as air
+</code></pre>
+	</div>
+</section>
+						</div>
+					</div>
+					<div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+						<div id="doc-nav" class="doc-nav">
+							<nav id="doc-menu" class="nav doc-menu flex-column sticky">
+<a class="nav-link scrollto" href="#EffClearRecipes">EffClearRecipes</a>
+<a class="nav-link scrollto" href="#EffDeserializeInventory">EffDeserializeInventory</a>
+<a class="nav-link scrollto" href="#EffMIDIStop">EffMIDIStop</a>
+<a class="nav-link scrollto" href="#EffPathfind">EffPathfind</a>
+<a class="nav-link scrollto" href="#EffOptionSQLUsername">EffOptionSQLUsername</a>
+<a class="nav-link scrollto" href="#EffClearItemRecipes">EffClearItemRecipes</a>
+<a class="nav-link scrollto" href="#EffOptionSQLPool">EffOptionSQLPool</a>
+<a class="nav-link scrollto" href="#EffShootItemProjectile">EffShootItemProjectile</a>
+<a class="nav-link scrollto" href="#EffShowCredits">EffShowCredits</a>
+<a class="nav-link scrollto" href="#EffMakeSay">EffMakeSay</a>
+<a class="nav-link scrollto" href="#EffOptionSQLURL">EffOptionSQLURL</a>
+<a class="nav-link scrollto" href="#EffBlockFall">EffBlockFall</a>
+<a class="nav-link scrollto" href="#EffNewRecipe">EffNewRecipe</a>
+<a class="nav-link scrollto" href="#EffLeash">EffLeash</a>
+<a class="nav-link scrollto" href="#EffOptionThread">EffOptionThread</a>
+<a class="nav-link scrollto" href="#EffExecuteLambda">EffExecuteLambda</a>
+<a class="nav-link scrollto" href="#EffEvaluateEffect">EffEvaluateEffect</a>
+<a class="nav-link scrollto" href="#EffTexture">EffTexture</a>
+<a class="nav-link scrollto" href="#EffPop">EffPop</a>
+<a class="nav-link scrollto" href="#EffSound">EffSound</a>
+<a class="nav-link scrollto" href="#EffOptionSkriptPermissionsManager">EffOptionSkriptPermissionsManager</a>
+<a class="nav-link scrollto" href="#EffSQLUpdate">EffSQLUpdate</a>
+<a class="nav-link scrollto" href="#EffPlayerVisibility">EffPlayerVisibility</a>
+<a class="nav-link scrollto" href="#EffTameTo">EffTameTo</a>
+<a class="nav-link scrollto" href="#EffEscape">EffEscape</a>
+<a class="nav-link scrollto" href="#EffOptionSQLInit">EffOptionSQLInit</a>
+<a class="nav-link scrollto" href="#EffStopServer">EffStopServer</a>
+<a class="nav-link scrollto" href="#EffSetBlock">EffSetBlock</a>
+<a class="nav-link scrollto" href="#EffBranch">EffBranch</a>
+<a class="nav-link scrollto" href="#EffOptionSQLPassword">EffOptionSQLPassword</a>
+<a class="nav-link scrollto" href="#EffHoming">EffHoming</a>
+<a class="nav-link scrollto" href="#EffMakeDamage">EffMakeDamage</a>
+<a class="nav-link scrollto" href="#EffMIDI">EffMIDI</a>
+<a class="nav-link scrollto" href="#EffFormatSlot">EffFormatSlot</a>
+<a class="nav-link scrollto" href="#EffOptionDeveloperMode">EffOptionDeveloperMode</a>
+<a class="nav-link scrollto" href="#EffLaunchFirework">EffLaunchFirework</a>
+<a class="nav-link scrollto" href="#EffClientSign">EffClientSign</a>
+<a class="nav-link scrollto" href="#EffClientBlock">EffClientBlock</a>
+								<a class="nav-link scrollto" href="#top">Go to Top</a>
+							</nav>
+						</div>
+					</div>
+				</div>		  
+			</div>
+		</div>	
+	</div>
+	 
+	<!-- Main Javascript -->		  
+	<script type="text/javascript" src="assets/plugins/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/plugins/prism/prism.js"></script>	
+	<script type="text/javascript" src="assets/plugins/jquery-scrollTo/jquery.scrollTo.min.js"></script>	  
+	<script type="text/javascript" src="assets/plugins/stickyfill/dist/stickyfill.min.js"></script>															 
+	<script type="text/javascript" src="assets/js/main.js"></script>
+
+</body>
+</html>
